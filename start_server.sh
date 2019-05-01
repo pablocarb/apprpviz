@@ -30,6 +30,7 @@ else
     cd $LOCALREPO
     git pull
     cd $CWD
+fi
 
 # Build new image
 docker build -t doe .
