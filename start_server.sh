@@ -23,7 +23,7 @@ docker rm doe
 docker rmi doe
 
 # Update repository and change to production branch
-if [! -d $LOCALREPO]
+if [ ! -d $LOCALREPO ]
 then
     git clone $REPO $LOCALREPO
 else
