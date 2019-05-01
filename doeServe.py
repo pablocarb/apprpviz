@@ -8,6 +8,7 @@ To view a copy of this license, visit <http://opensource.org/licenses/MIT/>.
 @author:  Pablo Carbonell, SYNBIOCHEM
 @description: A REST service for OptDes 
 '''
+import os
 from datetime import datetime
 from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
@@ -70,6 +71,7 @@ api.add_resource(RestQuery, '/REST/Query')
 api.add_resource(RestValidate, '/REST/Validate')
 
 
-if __name__== "__main__":  #only run server if file is called directly
-    app.run(host="0.0.0.0", port=8989, debug=True, threaded=True)
+if __name__== "__main__":  
+    debug = os.getenv('USER') == 'pablo'
+    app.run(host="0.0.0.0", port=8989, debug=debug, threaded=True)
 
