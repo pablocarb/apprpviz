@@ -17,12 +17,15 @@ import json
 import os
 import csv
 
-def testApp(url='http://127.0.0.1:8989/REST'):
+url = 'http://127.0.0.1:8989/REST'
+url = 'http://doe.synbiochem.co.uk/REST'
+
+def testApp(url=url):
     r = requests.get( url )
     res = json.loads( r.content.decode('utf-8') )
     print( res )
     
-def testUpload(url='http://127.0.0.1:8989/REST'):
+def testUpload(url=url):
     example = os.path.join( 'test', 'DoE_sheet.xlsx' )
     files = { 'file': open(example, 'rb' ) }
     values = {'size': 64}

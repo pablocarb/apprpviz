@@ -3,8 +3,10 @@
 # Run script from its folder
 CWD=$PWD
 # Define repository location
+LOCALREPO=doebase
 GITHUB=https://github.com/pablocarb
-REPO=$GITHUB/doebase.git
+REPO=$GITHUB/${LOCALREPO}.git
+
 # true for the cloud server, false for local installation
 DEPLOY=true
 if [ "$USER" == "pablo" ]; then
@@ -21,8 +23,13 @@ docker rm doe
 docker rmi doe
 
 # Update repository and change to production branch
-rm -rf doebase
-git clone $REPO doebase
+if [! -d $LOCALREPO]
+then
+    git clone $REPO $LOCALREPO
+else
+    cd $LOCALREPO
+    git pull
+    cd $CWD
 
 # Build new image
 docker build -t doe .
