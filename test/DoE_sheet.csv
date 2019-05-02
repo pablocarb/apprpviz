@@ -1,0 +1,27 @@
+,DoE position,DoE permutation class,DoE designation,Part number,Type,Name,Info,Unnamed: 7,Comments,Unnamed: 9,Unnamed: 10,Unnamed: 11,Enzyme
+0,1,,origin,SYNBIOHUB1,Replication origin,p15A,Med,,,,,,
+1,2,,resistance,SYNBIOHUB2,Antibiotic resistance,AmpR,,,,,,,
+2,3,,promoter,SYNBIOHUB3,Backbone promoter,Ptrc,High,,,,,,
+3,3,,promoter,SYNBIOHUB4,Backbone promoter,PlacUV5,Low,,,,,,
+4,4,1.0,gene,SYNBIOHUB5,ORF,ZmPAL,Q8VXG7,,Zea mays (Maize),,,,"Chorismate pyruvate-lyase, CPL, (ubiC)"
+5,6,1.0,gene,SYNBIOHUB6,ORF,Os4CL,Q6ETN3,,Oryza sativa  subsp. Japonica (Rice),,,,"p-hydroxybenzoate hydroxylase, xxx (pobA)"
+6,8,1.0,gene,SYNBIOHUB7,ORF,PdCHSX,Q9MBF0,,Pinus densiflora (Japanese red pine),,,,Uncharacterized protein (cgR_0493)
+7,10,1.0,gene,SYNBIOHUB8,ORF,AtCHI1,P41088,,Arabidopsis thaliana (Mouse-ear cress),,,,Protocatechuate decarboxylase (aroY)
+8,10,1.0,gene,SYNBIOHUB9,ORF,MsCHI1,P28012,,Medicago sative (Alfalfa),,,,
+9,12,1.0,gene,SYNBIOHUB10,ORF,PcFNSI,Q7XZQ8,,Petroselinum crispum (Parsley),,,,"Catechol 1,2-dioxygenase (catA-I)"
+10,5,,promoter,SYNBIOHUB11,promoter,Ptrc,High,,,,,,
+11,5,,promoter,SYNBIOHUB12,promoter,PlacUV5_2,Low,,,,,,
+12,5,,promoter,-,promoter,,Null,,,,,,
+13,5,,promoter,-,promoter,,Null,,,,,,
+14,7,,promoter,SYNBIOHUB13,promoter,Ptrc_2,High,,DoE library size,48.0,,,
+15,7,,promoter,SYNBIOHUB14,promoter,PlacUV5_3,Low,,,,,,
+16,7,,promoter,-,promoter,,Null,,,,,,
+17,7,,promoter,-,promoter,,Null,,,,,,
+18,9,,promoter,SYNBIOHUB15,promoter,Ptrc_3,High,,,,,,
+19,9,,promoter,SYNBIOHUB16,promoter,PlacUV5_4,Low,,,,,,
+20,9,,promoter,-,promoter,,Null,,,,,,
+21,9,,promoter,-,promoter,,Null,,,,,,
+22,11,,promoter,SYNBIOHUB17,promoter,Ptrc_4,High,,,,,,
+23,11,,promoter,SYNBIOHUB18,promoter,PlacUV5_5,Low,,,,,,
+24,11,,promoter,-,promoter,,Null,,,,,,
+25,11,,promoter,-,promoter,,Null,,,,,,

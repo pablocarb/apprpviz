@@ -43,7 +43,8 @@ class RestQuery( Resource ):
     def post(self):
         file_upload = request.files['file']
         size = int( request.values.get('size') )
-        diagnostics = doeRequest(file_upload, size)
+        ftype = request.values.get('format') 
+        diagnostics = doeRequest(file_upload, ftype, size)
         data = {'M': diagnostics['M'].tolist(),
                 'J': diagnostics['J'],
                 'pow': diagnostics['J'],
@@ -53,23 +54,8 @@ class RestQuery( Resource ):
                 'seed': diagnostics['seed']}
         return jsonify( stamp(data, 1) )
 
-class RestValidate( Resource ):
-    """ REST interface that validates the input file (Excel or csv) 
-    and returns a clean formatted table that can be reused as input."""
-    def post(self):
-        args = request.json
-        if 'xlsx' in args:
-            data = args['xlsx']
-        elif 'csv' in args:
-            data = args['csv']
-        else:
-            data = None
-        return jsonify( stamp(data) )
-
 api.add_resource(RestApp, '/REST')
 api.add_resource(RestQuery, '/REST/Query')
-api.add_resource(RestValidate, '/REST/Validate')
-
 
 if __name__== "__main__":  
     debug = os.getenv('USER') == 'pablo'

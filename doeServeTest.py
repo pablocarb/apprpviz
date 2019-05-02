@@ -26,9 +26,9 @@ def testApp(url=url):
     print( res )
     
 def testUpload(url=url):
-    example = os.path.join( 'test', 'DoE_sheet.xlsx' )
+    example = os.path.join( 'test', 'DoE_sheet.csv' )
     files = { 'file': open(example, 'rb' ) }
-    values = {'size': 64}
+    values = {'size': 64, 'format': 'csv'}
     r = requests.post( os.path.join(url, 'Query' ), files=files, data=values )
     res = json.loads( r.content.decode('utf-8') )
     M = res['data']['M']
