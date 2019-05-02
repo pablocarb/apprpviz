@@ -17,7 +17,7 @@ fi
 docker stop nginx-proxy
 docker rm nginx-proxy
 
-# Stop an delete selprom containers
+# Stop an delete doe containers
 docker stop doe
 docker rm doe
 docker rmi doe
