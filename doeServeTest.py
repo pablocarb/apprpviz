@@ -18,7 +18,7 @@ import os
 import csv
 
 url = 'http://127.0.0.1:8989/REST'
-url = 'http://doe.synbiochem.co.uk/REST'
+url = 'http://optbiodes.synbiochem.co.uk/REST'
 
 def testApp(url=url):
     r = requests.get( url )
@@ -28,7 +28,7 @@ def testApp(url=url):
 def testUpload(url=url):
     example = os.path.join( 'test', 'DoE_sheet.csv' )
     files = { 'file': open(example, 'rb' ) }
-    values = {'size': 64, 'format': 'csv'}
+    values = {'size': 48, 'format': 'csv'}
     r = requests.post( os.path.join(url, 'Query' ), files=files, data=values )
     res = json.loads( r.content.decode('utf-8') )
     M = res['data']['M']
