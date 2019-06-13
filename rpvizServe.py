@@ -12,6 +12,7 @@ import os
 from datetime import datetime
 from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
+import tempfile
 from rpviz.main import run
 
 app = Flask(__name__)
@@ -42,7 +43,13 @@ class RestQuery( Resource ):
     """
     def post(self):
         file_upload = request.files['file']
-        html = run( file_upload )
+        tmpin = tempfile.NamedTemporaryFile()
+        tmpin.write(file_upload.read())
+        infile = tmpin.name
+        outfile = tempfile.NamedTemporaryFile().name
+        run( infile, outfile )
+        with open(outfile) as h:
+            html = h.read()
         data = {'html': html}
         return jsonify( stamp(data, 1) )
 

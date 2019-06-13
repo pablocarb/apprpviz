@@ -16,28 +16,35 @@ import requests
 import json
 import os
 import csv
+import argparse
 
-url = 'http://127.0.0.1:8998/REST'
-url = 'http://rpviz.synbiochem.co.uk/REST'
 
-def testApp(url=url):
+def arguments():
+    parser = argparse.ArgumentParser(description='toolRPViz: Pathway visualizer. Pablo Carbonell, SYNBIOCHEM, 2019')
+    parser.add_argument('infile', 
+                        help='Pathways in SBML format.')
+    parser.add_argument('outfile', 
+                        help='HTML visualizer file.')
+    parser.add_argument('-server', default='http://rpviz.synbiochem.co.uk/REST',
+                        help='RPViz server.')
+    return parser
+
+def testApp(url):
     r = requests.get( url )
     res = json.loads( r.content.decode('utf-8') )
     print( res )
     
-def testUpload(url=url):
-    example = os.path.join( 'test', 'path.gz' )
-    files = { 'file': open(example, 'rb' ) }
+def testUpload(infile, outfile, url):
+    files = { 'file': open(infile, 'rb' ) }
     r = requests.post( os.path.join(url, 'Query' ), files=files )
     res = json.loads( r.content.decode('utf-8') )
-    M = res['data']['html']
-    out = os.path.join( 'test', 'out.html')
-    with open(out, 'w') as h:
-        cw = csv.writer(h)      
-        for row in M:
-            cw.writerow( row )
+    html = res['data']['html']
+    with open(outfile, 'w') as h:
+        h.write(html)      
     print( 'Success!' )
 
 if __name__ == '__main__':
-    testApp()
-    testUpload()
+    parser = arguments()
+    arg = parser.parse_args()
+    testApp(arg.server)
+    testUpload(arg.infile,arg.outfile,arg.server)
