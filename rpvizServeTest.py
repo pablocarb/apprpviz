@@ -1,24 +1,24 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-doeTest (c) University of Manchester 2019
+rpvizTest (c) University of Manchester 2019
 
-doeTest is licensed under the MIT License.
+rpvizTest is licensed under the MIT License.
 
 To view a copy of this license, visit <http://opensource.org/licenses/MIT/>.
 
 Created on Wed May  1 09:54:39 2019
 
 @author:  Pablo Carbonell, SYNBIOCHEM
-@description: Test the DoE server 
+@description: Test the rpviz server 
 """
 import requests
 import json
 import os
 import csv
 
-url = 'http://127.0.0.1:8989/REST'
-url = 'http://optbiodes.synbiochem.co.uk/REST'
+url = 'http://127.0.0.1:8998/REST'
+url = 'http://rpviz.synbiochem.co.uk/REST'
 
 def testApp(url=url):
     r = requests.get( url )
@@ -26,19 +26,17 @@ def testApp(url=url):
     print( res )
     
 def testUpload(url=url):
-    example = os.path.join( 'test', 'DoE_sheet.csv' )
+    example = os.path.join( 'test', 'path.gz' )
     files = { 'file': open(example, 'rb' ) }
-    values = {'size': 48, 'format': 'csv'}
-    r = requests.post( os.path.join(url, 'Query' ), files=files, data=values )
+    r = requests.post( os.path.join(url, 'Query' ), files=files )
     res = json.loads( r.content.decode('utf-8') )
-    M = res['data']['M']
-    out = os.path.join( 'test', 'DoE_run.csv')
+    M = res['data']['html']
+    out = os.path.join( 'test', 'out.html')
     with open(out, 'w') as h:
         cw = csv.writer(h)      
-        cw.writerow( res['data']['names'] )
         for row in M:
             cw.writerow( row )
-    print( 'Size:', res['data']['libsize'], 'Efficiency:', res['data']['J'] )
+    print( 'Success!' )
 
 if __name__ == '__main__':
     testApp()

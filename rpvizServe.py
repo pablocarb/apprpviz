@@ -12,14 +12,14 @@ import os
 from datetime import datetime
 from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
-from doebase.OptDes import doeRequest
+from rpviz.main import run
 
 app = Flask(__name__)
 api = Api(app)
 
 def stamp( data, status=1 ):
-    appinfo = {'app': 'OptDes', 'version': '1.0', 
-               'author': 'Pablo Carbonell',
+    appinfo = {'app': 'rpviz', 'version': '1.0', 
+               'author': 'Anaelle Badier, Pablo Carbonell',
                'organization': 'Synbiochem',
                'time': datetime.now().isoformat(), 
                'status': status}
@@ -42,16 +42,8 @@ class RestQuery( Resource ):
     """
     def post(self):
         file_upload = request.files['file']
-        size = int( request.values.get('size') )
-        ftype = request.values.get('format') 
-        diagnostics = doeRequest(file_upload, ftype, size)
-        data = {'M': diagnostics['M'].tolist(),
-                'J': diagnostics['J'],
-                'pow': diagnostics['J'],
-                'rpv': diagnostics['J'],
-                'names': diagnostics['names'],
-                'libsize': diagnostics['libsize'],
-                'seed': diagnostics['seed']}
+        html = run( file_upload )
+        data = {'html': html}
         return jsonify( stamp(data, 1) )
 
 api.add_resource(RestApp, '/REST')
@@ -59,5 +51,5 @@ api.add_resource(RestQuery, '/REST/Query')
 
 if __name__== "__main__":  
     debug = os.getenv('USER') == 'pablo'
-    app.run(host="0.0.0.0", port=8989, debug=debug, threaded=True)
+    app.run(host="0.0.0.0", port=8998, debug=debug, threaded=True)
 
