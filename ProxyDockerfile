@@ -3,7 +3,7 @@
 # build with: "sudo deocker build -t Dockerfile ."
 
 # Install basic image
-FROM wilder/nginx-proxy
+FROM jwilder/nginx-proxy
 
 # Install additional tools
 RUN { \

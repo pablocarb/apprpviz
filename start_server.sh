@@ -37,7 +37,7 @@ docker stop nginx-proxy
 docker rm nginx-proxy
 
 # Build new proxy image
-docker build -t sbc/nginx-proxy -f ProxyDockerfile
+docker build -t sbc/nginx-proxy -f ProxyDockerfile .
 
 # Run container
 if [ "$DEPLOY" == "true" ]; then
