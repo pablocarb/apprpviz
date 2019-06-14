@@ -43,8 +43,11 @@ class RestQuery( Resource ):
     """
     def post(self):
         file_upload = request.files['file']
+        content = file_upload.read()
+        infile = os.path.join( os.path.dirname(__file__), 'in.html')
+        open(infile, 'w').write(content)
         tmpin = tempfile.NamedTemporaryFile()
-        tmpin.write(file_upload.read())
+        tmpin.write(content)
         infile = tmpin.name
         outfile = tempfile.NamedTemporaryFile().name
         outfile = os.path.join( os.path.dirname(__file__), 'test.html')
