@@ -47,10 +47,12 @@ class RestQuery( Resource ):
         tmpin.write(file_upload.read())
         infile = tmpin.name
         outfile = tempfile.NamedTemporaryFile().name
+        outfile = os.path.join( os.path.dirname(__file__), 'test.html')
         run( infile, outfile )
         with open(outfile) as h:
             html = h.read()
-        data = {'html': html}
+#        data = {'html': html}
+        data = {'html': ''}
         return jsonify( stamp(data, 1) )
 
 api.add_resource(RestApp, '/REST')
