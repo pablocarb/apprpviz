@@ -36,6 +36,8 @@ def testApp(url):
     
 def testUpload(infile, outfile, url):
     files = { 'file': open(infile, 'rb' ) }
+    import pdb
+    pdb.set_trace()
     r = requests.post( os.path.join(url, 'Query' ), files=files )
     res = json.loads( r.content.decode('utf-8') )
     html = res['data']['html']
