@@ -15,17 +15,23 @@ Created on Wed May  1 09:54:39 2019
 import requests
 import json
 import os
-import csv
 import argparse
+from urllib.parse import urljoin
 
 
 def arguments():
     parser = argparse.ArgumentParser(description='toolRPViz: Pathway visualizer. Pablo Carbonell, SYNBIOCHEM, 2019')
     parser.add_argument('infile', 
-                        help='Pathways in SBML format.')
-    parser.add_argument('outfile', 
-                        help='HTML visualizer file.')
-    parser.add_argument('-server', default='http://rpviz.synbiochem.co.uk/REST',
+                        help='Input folder with sbml files as in tar format.')
+    parser.add_argument('outfile',
+                        help='html file.')
+    parser.add_argument('--choice',
+                        default="2",
+                        help='What kind of input do you want ? \n 1/Single HTML file \n 2/Separated HTML files \n 3/View directly in Cytoscape \n 4/Generate a file readable in Cytoscape \n')
+    parser.add_argument('--selenzyme_table',
+                        default="N",
+                        help='Do you want to display the selenzyme information ? Y/N')
+    parser.add_argument('-server', default='http://localhost:8998/REST',
                         help='RPViz server.')
     return parser
 
@@ -34,9 +40,10 @@ def testApp(url):
     res = json.loads( r.content.decode('utf-8') )
     print( res )
     
-def testUpload(infile, outfile, url):
+def testUpload(infile, outfile,choice,selenzyme_table, url):
     files = { 'file': open(infile, 'rb' ) }
-    r = requests.post( os.path.join(url, 'Query' ), files=files )
+    #r = requests.post( urljoin(url, 'Query' ), files=files )
+    r=requests.post(url+'/Query',files=files)
     res = json.loads( r.content.decode('utf-8') )
     html = res['data']['html']
     with open(outfile, 'w') as h:
@@ -47,4 +54,4 @@ if __name__ == '__main__':
     parser = arguments()
     arg = parser.parse_args()
     testApp(arg.server)
-    testUpload(arg.infile,arg.outfile,arg.server)
+    testUpload(arg.infile,arg.outfile,arg.choice, arg.selenzyme_table,arg.server)

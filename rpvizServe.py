@@ -9,6 +9,7 @@ To view a copy of this license, visit <http://opensource.org/licenses/MIT/>.
 @description: A REST service for OptDes 
 '''
 import os
+import uuid
 from datetime import datetime
 from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
@@ -42,10 +43,11 @@ class RestQuery( Resource ):
     """
     def post(self):
         file_upload = request.files['file']
+        fid = str(uuid.uuid4())
+        infile=os.path.abspath( os.path.join(os.path.join('data',fid+'.tar')) )
         content = file_upload.read()
-        infile = os.path.join( os.path.dirname(__file__), 'in.html')
-        open(infile, 'w').write(content)
-        outfile = os.path.join( os.path.dirname(__file__), 'out.html')
+        open(infile, 'wb').write(content)
+        outfile = os.path.abspath(os.path.join('outfile', 'out.html'))
         run( infile, outfile )
         with open(outfile) as h:
             html = h.read()
