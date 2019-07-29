@@ -14,9 +14,8 @@ Created on Wed May  1 09:54:39 2019
 """
 import requests
 import json
-import os
 import argparse
-from urllib.parse import urljoin
+
 
 
 def arguments():
@@ -40,9 +39,8 @@ def testApp(url):
     res = json.loads( r.content.decode('utf-8') )
     print( res )
     
-def testUpload(infile, outfile,choice,selenzyme_table, url):
+def testUpload(infile, outfile,choice,selenzyme_table,url):
     files = { 'file': open(infile, 'rb' ) }
-    #r = requests.post( urljoin(url, 'Query' ), files=files )
     r=requests.post(url+'/Query',files=files)
     res = json.loads( r.content.decode('utf-8') )
     html = res['data']['html']

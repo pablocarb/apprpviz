@@ -52,6 +52,7 @@ class RestQuery( Resource ):
         with open(outfile) as h:
             html = h.read()
         data = {'html': html}
+        os.remove(infile)
         return jsonify( stamp(data, 1) )
 
 api.add_resource(RestApp, '/REST')
