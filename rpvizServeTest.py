@@ -18,14 +18,15 @@ import argparse
 
 
 
+
 def arguments():
     parser = argparse.ArgumentParser(description='toolRPViz: Pathway visualizer. Pablo Carbonell, SYNBIOCHEM, 2019')
     parser.add_argument('infile', 
                         help='Input folder with sbml files as in tar format.')
     parser.add_argument('outfile',
-                        help='html file.')
+                        help='tar file.')
     parser.add_argument('--choice',
-                        default="2",
+                        default="3",
                         help='What kind of input do you want ? \n 1/Single HTML file \n 2/Separated HTML files \n 3/View directly in Cytoscape \n 4/Generate a file readable in Cytoscape \n')
     parser.add_argument('--selenzyme_table',
                         default="N",
@@ -41,11 +42,12 @@ def testApp(url):
     
 def testUpload(infile, outfile,choice,selenzyme_table,url):
     files = { 'file': open(infile, 'rb' ) }
+    data = {'selenzyme_table': 'N', 'input_format': 'sbml'}
     r=requests.post(url+'/Query',files=files)
     res = json.loads( r.content.decode('utf-8') )
-    html = res['data']['html']
-    with open(outfile, 'w') as h:
-        h.write(html)      
+    tar = res['data']['tar']
+    with open(outfile, 'wb') as h:
+        tar.write(html)      
     print( 'Success!' )
 
 if __name__ == '__main__':

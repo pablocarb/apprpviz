@@ -10,6 +10,7 @@ To view a copy of this license, visit <http://opensource.org/licenses/MIT/>.
 '''
 import os
 import uuid
+import shutil
 from datetime import datetime
 from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
@@ -43,16 +44,27 @@ class RestQuery( Resource ):
     """
     def post(self):
         file_upload = request.files['file']
+        try:
+            selenzyme_table = request.data['selenzyme_table']
+        except:
+            selenzyme_table = 'N'
+        try:
+            input_format = request.data['input_format']
+        except:
+            input_format = 'sbml'
         fid = str(uuid.uuid4())
         infile=os.path.abspath( os.path.join(os.path.join('data',fid+'.tar')) )
         content = file_upload.read()
         open(infile, 'wb').write(content)
-        outfile = os.path.abspath(os.path.join('outfile', 'out.html'))
-        run( infile, outfile )
-        with open(outfile) as h:
-            html = h.read()
-        data = {'html': html}
+        oid = str(uuid.uuid4())
+        outfolder = os.path.abspath( os.path.join('data', oid ) )
+        os.mkdir( outfolder )
+        outfile = run( infile, outfolder, selenzyme_table=selenzyme_table, typeformat=input_format, choice='3' )
+        with open(outfile,'rb') as h:
+            tar = h.read()
+        data = {'tar': tar}
         os.remove(infile)
+        shutil.rmtree( outfolder )
         return jsonify( stamp(data, 1) )
 
 api.add_resource(RestApp, '/REST')
