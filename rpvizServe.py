@@ -12,7 +12,7 @@ import os
 import uuid
 import shutil
 from datetime import datetime
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify,send_file
 from flask_restful import Resource, Api
 from rpviz.main import run
 
@@ -59,7 +59,10 @@ class RestQuery( Resource ):
         oid = str(uuid.uuid4())
         outfolder = os.path.abspath( os.path.join('data', oid ) )
         os.mkdir( outfolder )
+        print('done')
         outfile = run( infile, outfolder, selenzyme_table=selenzyme_table, typeformat=input_format, choice='5' )
+        return send_file(outfile, as_attachment=True)
+    
         with open(outfile,'rb') as h:
             tar = h.read()
         data = {'tar': tar}
