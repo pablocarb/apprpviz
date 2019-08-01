@@ -59,7 +59,7 @@ class RestQuery( Resource ):
         oid = str(uuid.uuid4())
         outfolder = os.path.abspath( os.path.join('data', oid ) )
         os.mkdir( outfolder )
-        outfile = run( infile, outfolder, selenzyme_table=selenzyme_table, typeformat=input_format, choice='3' )
+        outfile = run( infile, outfolder, selenzyme_table=selenzyme_table, typeformat=input_format, choice='5' )
         with open(outfile,'rb') as h:
             tar = h.read()
         data = {'tar': tar}
