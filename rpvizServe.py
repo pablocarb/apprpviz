@@ -70,7 +70,9 @@ class RestQuery( Resource ):
 api.add_resource(RestApp, '/REST')
 api.add_resource(RestQuery, '/REST/Query')
 
-if __name__== "__main__":  
+if __name__== "__main__":
+    if not os.path.exists('data'):
+        os.mkdir('data')
     debug = os.getenv('USER') == 'pablo'
     app.run(host="0.0.0.0", port=8998, debug=debug, threaded=True)
 
