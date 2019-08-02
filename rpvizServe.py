@@ -52,12 +52,13 @@ class RestQuery( Resource ):
             input_format = request.data['input_format']
         except:
             input_format = 'sbml'
+        dataFolder = os.path.join( __file__, os.path.exists('data') )
         fid = str(uuid.uuid4())
-        infile=os.path.abspath( os.path.join(os.path.join('data',fid+'.tar')) )
+        infile= os.path.join(dataFolder,fid+'.tar') 
         content = file_upload.read()
         open(infile, 'wb').write(content)
         oid = str(uuid.uuid4())
-        outfolder = os.path.abspath( os.path.join('data', oid ) )
+        outfolder = os.path.join( dataFolder, oid ) 
         os.mkdir( outfolder )
         print('done')
         outfile = run( infile, outfolder, selenzyme_table=selenzyme_table, typeformat=input_format, choice='5' )
@@ -74,8 +75,9 @@ api.add_resource(RestApp, '/REST')
 api.add_resource(RestQuery, '/REST/Query')
 
 if __name__== "__main__":
-    if not os.path.exists('data'):
-        os.mkdir('data')
+    dataFolder = os.path.join( __file__, os.path.exists('data') )
+    if not os.path.exists( dataFolder ):
+        os.mkdir(dataFolder)
     debug = os.getenv('USER') == 'pablo'
     app.run(host="0.0.0.0", port=8998, debug=debug, threaded=True)
 
