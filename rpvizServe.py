@@ -18,6 +18,7 @@ from rpviz.main import run
 
 app = Flask(__name__)
 api = Api(app)
+dataFolder = os.path.join( os.path.dirname(__file__),  'data' )
 
 def stamp( data, status=1 ):
     appinfo = {'app': 'rpviz', 'version': '1.0', 
@@ -52,7 +53,6 @@ class RestQuery( Resource ):
             input_format = request.data['input_format']
         except:
             input_format = 'sbml'
-        dataFolder = os.path.join( __file__, 'data' )
         fid = str(uuid.uuid4())
         infile= os.path.join(dataFolder,fid+'.tar') 
         content = file_upload.read()
@@ -75,7 +75,6 @@ api.add_resource(RestApp, '/REST')
 api.add_resource(RestQuery, '/REST/Query')
 
 if __name__== "__main__":
-    dataFolder = os.path.join( __file__,  'data' )
     if not os.path.exists( dataFolder ):
         os.mkdir(dataFolder)
     debug = os.getenv('USER') == 'pablo'
