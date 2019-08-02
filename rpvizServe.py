@@ -75,7 +75,7 @@ api.add_resource(RestApp, '/REST')
 api.add_resource(RestQuery, '/REST/Query')
 
 if __name__== "__main__":
-    dataFolder = os.path.join( __file__, os.path.exists('data') )
+    dataFolder = os.path.join( __file__,  'data' )
     if not os.path.exists( dataFolder ):
         os.mkdir(dataFolder)
     debug = os.getenv('USER') == 'pablo'
