@@ -1,9 +1,9 @@
 # Docker file that installs docker container for Selprom
 #
-# build with: "sudo deocker build -t Dockerfile ."
+# build with: "sudo docker build -t Dockerfile ."
 
 # Install basic image
-FROM continuumio/anaconda3
+FROM continuumio/miniconda3
 
 # Install additional tools
 RUN conda install -c conda-forge flask-restful=0.3.6
