@@ -10,7 +10,12 @@ RUN conda install -c conda-forge flask-restful=0.3.6
 RUN conda install -c sbmlteam python-libsbml
 RUN conda install -c anaconda networkx
 RUN conda install -c anaconda beautifulsoup4
+RUN conda install -c conda-forge xorg-libxrender
+RUN conda install -c anaconda lxml
+RUN conda install -c anaconda ipython
+RUN conda install -c conda-forge py2cytoscape 
 RUN conda install -c rdkit rdkit
+
 
 # Start the server
 ENTRYPOINT ["python"] 
