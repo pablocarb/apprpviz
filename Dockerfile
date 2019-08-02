@@ -3,7 +3,7 @@
 # build with: "sudo deocker build -t Dockerfile ."
 
 # Install basic image
-FROM continuumio/anaconda
+FROM continuumio/anaconda3
 
 # Install additional tools
 RUN conda install -c conda-forge flask-restful=0.3.6
