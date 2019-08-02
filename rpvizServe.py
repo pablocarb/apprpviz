@@ -52,7 +52,7 @@ class RestQuery( Resource ):
             input_format = request.data['input_format']
         except:
             input_format = 'sbml'
-        dataFolder = os.path.join( __file__, os.path.exists('data') )
+        dataFolder = os.path.join( __file__, 'data' )
         fid = str(uuid.uuid4())
         infile= os.path.join(dataFolder,fid+'.tar') 
         content = file_upload.read()
