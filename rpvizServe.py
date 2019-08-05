@@ -11,6 +11,7 @@ To view a copy of this license, visit <http://opensource.org/licenses/MIT/>.
 import os
 import uuid
 import shutil
+import json
 from datetime import datetime
 from flask import Flask, request, jsonify,send_file
 from flask_restful import Resource, Api
@@ -44,13 +45,17 @@ class RestQuery( Resource ):
         order to keep the client lighter.
     """
     def post(self):
+        import pdb
+        pdb.set_trace()
         file_upload = request.files['file']
+        data_upload = request.files['data']
+        data = json.load( data_upload )
         try:
-            selenzyme_table = request.data['selenzyme_table']
+            selenzyme_table = data['selenzyme_table']
         except:
             selenzyme_table = 'N'
         try:
-            input_format = request.data['input_format']
+            input_format = data['input_format']
         except:
             input_format = 'sbml'
         fid = str(uuid.uuid4())

@@ -41,8 +41,8 @@ def testApp(url):
     print( res )
     
 def testUpload(infile, outfile,choice,selenzyme_table,url):
-    files = { 'file': open(infile, 'rb' ) }
     data = {'selenzyme_table': 'N', 'input_format': 'sbml'}
+    files = { 'file': open(infile, 'rb' ), 'data': ('data.json', json.dumps(data)) }
     r=requests.post(url+'/Query',files=files)
     open(outfile,'wb').write( r.content )
     print( 'Success!' )
