@@ -45,8 +45,7 @@ class RestQuery( Resource ):
         order to keep the client lighter.
     """
     def post(self):
-        import pdb
-        pdb.set_trace()
+       
         file_upload = request.files['file']
         data_upload = request.files['data']
         data = json.load( data_upload )

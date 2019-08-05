@@ -28,6 +28,8 @@ def arguments():
     parser.add_argument('--choice',
                         default="5",
                         help='What kind of input do you want ? \n 1/Single HTML file \n 2/Separated HTML files \n 3/View directly in Cytoscape \n 4/Generate a file readable in Cytoscape \n')
+    parser.add_argument('--format',
+                        help='What kind of input is it ? sbml/csv')
     parser.add_argument('--selenzyme_table',
                         default="N",
                         help='Do you want to display the selenzyme information ? Y/N')
@@ -40,8 +42,8 @@ def testApp(url):
     res = json.loads( r.content.decode('utf-8') )
     print( res )
     
-def testUpload(infile, outfile,choice,selenzyme_table,url):
-    data = {'selenzyme_table': 'N', 'input_format': 'sbml'}
+def testUpload(infile, outfile,choice,selenzyme_table,url, informat):
+    data = {'selenzyme_table': 'N', 'input_format': informat}
     files = { 'file': open(infile, 'rb' ), 'data': ('data.json', json.dumps(data)) }
     r=requests.post(url+'/Query',files=files)
     open(outfile,'wb').write( r.content )
@@ -51,4 +53,4 @@ if __name__ == '__main__':
     parser = arguments()
     arg = parser.parse_args()
     testApp(arg.server)
-    testUpload(arg.infile,arg.outfile,arg.choice, arg.selenzyme_table,arg.server)
+    testUpload(arg.infile,arg.outfile,arg.choice, arg.selenzyme_table,arg.server,arg.format)
