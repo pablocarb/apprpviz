@@ -29,7 +29,12 @@ else
     cd $CWD
 fi
 
-wget https://www.metanetx.org/cgi-bin/mnxget/mnxref/chem_prop.tsv -O rpviz/chem_prop.tsv
+cheminfo=rpviz/chem_prop.tsv
+
+if [! -f $cheminfo ]
+    wget https://www.metanetx.org/cgi-bin/mnxget/mnxref/chem_prop.tsv -O $cheminfo
+fi
+
 
 # Build new image
 docker build -t $LOCALREPO .
