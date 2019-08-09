@@ -32,6 +32,7 @@ fi
 cheminfo=rpviz/chem_prop.tsv
 
 if [! -f $cheminfo ]
+then
     wget https://www.metanetx.org/cgi-bin/mnxget/mnxref/chem_prop.tsv -O $cheminfo
 fi
 
