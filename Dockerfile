@@ -16,6 +16,7 @@ RUN conda install -c anaconda ipython
 RUN conda install -c conda-forge py2cytoscape 
 RUN conda install -c rdkit rdkit
 RUN conda install -c mcs07 cirpy 
+RUN conda install -c bioconda pubchempy
 
 # Start the server
 ENTRYPOINT ["python"] 
