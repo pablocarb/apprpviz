@@ -25,6 +25,8 @@ def arguments():
     parser.add_argument('--selenzyme_table',
                         default="N",
                         help='Do you want to display the selenzyme information ? Y/N')
+    parser.add_argument('--filenames',
+                        help='import a csv file matching smiles and products names')
     return parser
 
 
@@ -34,4 +36,4 @@ if __name__ == '__main__':
     outFolder=arg.outfolder
     if not os.path.exists( outFolder ): 
         os.mkdir(outFolder)
-    run(arg.infile,outFolder,arg.format,arg.choice,arg.selenzyme_table)
+    run(arg.infile,outFolder,arg.format,arg.choice,arg.selenzyme_table,arg.filenames)

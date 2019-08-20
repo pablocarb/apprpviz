@@ -65,7 +65,7 @@ class RestQuery( Resource ):
         outfolder = os.path.join( dataFolder, oid ) 
         os.mkdir( outfolder )
         print('done')
-        outfile = run( infile, outfolder, selenzyme_table=selenzyme_table, typeformat=input_format, choice='5' )
+        outfile = run( infile, outfolder, selenzyme_table=selenzyme_table, typeformat=input_format, choice='5')
         return send_file(outfile, as_attachment=True)
     
         with open(outfile,'rb') as h:
