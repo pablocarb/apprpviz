@@ -33,6 +33,8 @@ def arguments():
     parser.add_argument('--selenzyme_table',
                         default="N",
                         help='Do you want to display the selenzyme information ? Y/N')
+    parser.add_argument('--filenames',
+                    help='import a csv file matching smiles and products names')
     parser.add_argument('-server', default='http://localhost:8998/REST',
                         help='RPViz server.')
     return parser
@@ -53,4 +55,4 @@ if __name__ == '__main__':
     parser = arguments()
     arg = parser.parse_args()
     testApp(arg.server)
-    testUpload(arg.infile,arg.outfile,arg.choice, arg.selenzyme_table,arg.server,arg.format)
+    testUpload(arg.infile,arg.outfile,arg.choice, arg.selenzyme_table,arg.server,arg.format,arg.filenames)
